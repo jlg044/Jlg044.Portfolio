@@ -51,7 +51,7 @@ const dictionaries: Record<Lang, Dict> = {
     },
     about: {
       heading: "Sobre mí",
-      body: "Estudiante de Ingeniería Informática en la Universidad de Almería, especializado en desarrollo full-stack, sistemas distribuidos y machine learning. Me gusta trabajar en proyectos que combinan hardware, backend y datos: desde localización indoor con BLE hasta clasificación de imágenes con CNNs entrenadas desde cero. Cómodo tanto trabajando en equipo como llevando un proyecto de principio a fin en solitario.",
+      body: "Cursando el Máster en Ingeniería Informática (mención Big Data) en la Universidad de Almería, tras graduarme en Ingeniería Informática (Tecnologías de la Información) con Matrícula de Honor. Actualmente trabajo como desarrollador Java en la Fundación UAL, modernizando una aplicación Java Enterprise sobre Oracle e integrando APIs REST. Antes, en mis prácticas en GrodiTech, entrené modelos de visión artificial con YOLOv5, construí un portfolio en React y desarrollé un servidor de actualizaciones automáticas para robots. Formé parte del equipo ganador del reto Gestamp en el IndesIAhack 2024. Me interesa seguir profundizando en inteligencia artificial y análisis de datos.",
     },
     projects: {
       heading: "Proyectos",
@@ -82,7 +82,7 @@ const dictionaries: Record<Lang, Dict> = {
     },
     about: {
       heading: "About me",
-      body: "Computer Engineering student at the University of Almería, focused on full-stack development, distributed systems, and machine learning. I enjoy projects that combine hardware, backend, and data: from indoor BLE localization to image classification with CNNs trained from scratch. Comfortable both working in a team and owning a project end to end on my own.",
+      body: "Pursuing a Master's in Computer Engineering (Big Data track) at the University of Almería, after graduating in Computer Engineering (Information Technologies) with honors. I currently work as a Java developer at Fundación UAL, modernizing an enterprise Java application on Oracle and integrating REST APIs. Before that, during my internship at GrodiTech, I trained computer vision models with YOLOv5, built a portfolio site in React, and developed an automatic update server for robots. I was part of the winning team of the Gestamp challenge at IndesIAhack 2024. I'm interested in going deeper into AI and data analysis.",
     },
     projects: {
       heading: "Projects",
