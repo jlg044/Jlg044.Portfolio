@@ -3,6 +3,7 @@
 import { useLanguage } from "@/lib/i18n";
 import type { Project } from "@/lib/projects";
 import { ExternalLinkIcon, GitHubIcon } from "@/components/Icons";
+import { ProjectMedia } from "@/components/ProjectMedia";
 
 export function ProjectCard({ project }: { project: Project }) {
   const { lang, t } = useLanguage();
@@ -33,6 +34,8 @@ export function ProjectCard({ project }: { project: Project }) {
       <p className="mt-4 text-sm leading-relaxed text-neutral-300">
         {project.description[lang]}
       </p>
+
+      {project.media && <ProjectMedia media={project.media} />}
 
       <div className="mt-6 flex flex-wrap gap-2">
         {project.tech.map((tech) => (

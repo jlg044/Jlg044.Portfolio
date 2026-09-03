@@ -3,6 +3,19 @@ export type Collaborator = {
   github?: string;
 };
 
+export type ProjectMedia =
+  | { kind: "video"; src: string; caption: { es: string; en: string } }
+  | {
+      kind: "images";
+      items: { src: string; alt: { es: string; en: string } }[];
+    }
+  | {
+      kind: "code";
+      code: string;
+      language?: string;
+      caption: { es: string; en: string };
+    };
+
 export type Project = {
   slug: string;
   title: { es: string; en: string };
@@ -14,6 +27,7 @@ export type Project = {
   repo?: string;
   repoPrivate?: boolean;
   featured?: boolean;
+  media?: ProjectMedia;
 };
 
 export const projects: Project[] = [
@@ -43,6 +57,14 @@ export const projects: Project[] = [
     type: "solo",
     repo: "https://github.com/jlg044/JoseLuisTFG2025",
     featured: true,
+    media: {
+      kind: "video",
+      src: "/projects/tfg/demo.mp4",
+      caption: {
+        es: "Demo grabada para la defensa del TFG",
+        en: "Demo recorded for the thesis defense",
+      },
+    },
   },
   {
     slug: "hand-cnn-classifier",
@@ -73,6 +95,25 @@ export const projects: Project[] = [
     ],
     repo: "https://github.com/jlg044/CSDM-ABP/tree/main/Proyecto%20Final/Proyecto_hands_docker",
     featured: true,
+    media: {
+      kind: "images",
+      items: [
+        {
+          src: "/projects/hands-cnn/training_curves.png",
+          alt: {
+            es: "Curvas de entrenamiento (accuracy y loss) de la CNN",
+            en: "CNN training curves (accuracy and loss)",
+          },
+        },
+        {
+          src: "/projects/hands-cnn/confusion_matrix.png",
+          alt: {
+            es: "Matriz de confusión sobre el conjunto de test",
+            en: "Confusion matrix on the test set",
+          },
+        },
+      ],
+    },
   },
   {
     slug: "itsi-support-orchestration",
@@ -97,6 +138,25 @@ export const projects: Project[] = [
     ],
     repo: "https://github.com/jlg044/Proyecto_ITSI",
     featured: true,
+    media: {
+      kind: "code",
+      language: "bash",
+      caption: {
+        es: "Ejemplo real: crear un ticket VIP de alta prioridad (del README)",
+        en: "Real example: creating a high-priority VIP ticket (from the README)",
+      },
+      code: `curl -X POST http://localhost:5001/tickets \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "usuario": "Profesor ITSI",
+    "email": "profesor@itsi.com",
+    "asunto": "Consulta Crítica",
+    "urgencia": "Alta",
+    "categoria": "Tecnica"
+  }'
+
+# -> Se enruta automáticamente a la cola queue_vip_urgent`,
+    },
   },
   {
     slug: "tomato-disease-detection",
@@ -105,17 +165,43 @@ export const projects: Project[] = [
       en: "Tomato Disease Detection with AI",
     },
     summary: {
-      es: "Modelo de visión por computador para identificar enfermedades en plantas de tomate a partir de imágenes de hojas.",
-      en: "A computer vision model to identify diseases in tomato plants from leaf images.",
+      es: "Clasificador de enfermedades en hojas de tomate con ResNet50 y transfer learning, 96% de accuracy sobre 10 clases.",
+      en: "Tomato leaf disease classifier using ResNet50 and transfer learning, 96% accuracy across 10 classes.",
     },
     description: {
-      es: "Colaboración centrada en entrenar y evaluar un modelo de deep learning capaz de clasificar enfermedades comunes en plantas de tomate a partir de fotografías de hojas, como apoyo a la detección temprana en cultivos.",
-      en: "A collaboration focused on training and evaluating a deep learning model that classifies common tomato plant diseases from leaf photographs, supporting early detection in crops.",
+      es: "Clasificación automática de enfermedades en hojas de tomate (9 enfermedades + planta sana) mediante transfer learning con ResNet50 preentrenada en ImageNet, sobre un dataset de casi 247.000 imágenes con un desbalance de clases notable (14x entre la más y la menos representada), gestionado con WeightedRandomSampler y pesos de clase en la función de pérdida. Entrenamiento en dos fases (cabeza congelada y fine-tuning completo con learning rates discriminativos) alcanzando ~96% de accuracy y un F1 macro de 0.933 en el conjunto de test.",
+      en: "Automatic classification of tomato leaf diseases (9 diseases + healthy) using transfer learning with ImageNet-pretrained ResNet50, on a dataset of nearly 247,000 images with a significant class imbalance (14x between the largest and smallest class), handled with a WeightedRandomSampler and class weights in the loss function. Two-phase training (frozen head, then full fine-tuning with discriminative learning rates) reaching ~96% test accuracy and a macro F1 of 0.933.",
     },
-    tech: ["Python", "Jupyter Notebook", "Deep Learning"],
+    tech: ["PyTorch", "ResNet50", "Transfer Learning", "Jupyter Notebook"],
     type: "team",
     collaborators: [{ name: "jmu809", github: "https://github.com/jmu809" }],
     repo: "https://github.com/jmu809/DeteccionEnfermedadesTomates-IA",
+    media: {
+      kind: "images",
+      items: [
+        {
+          src: "/projects/tomato/training_curves.png",
+          alt: {
+            es: "Curvas de entrenamiento en las dos fases (congelado y fine-tuning)",
+            en: "Training curves across both phases (frozen and fine-tuning)",
+          },
+        },
+        {
+          src: "/projects/tomato/confusion_matrix.png",
+          alt: {
+            es: "Matriz de confusión sobre las 10 clases",
+            en: "Confusion matrix across the 10 classes",
+          },
+        },
+        {
+          src: "/projects/tomato/f1_por_clase.png",
+          alt: {
+            es: "F1-score por clase en el conjunto de test",
+            en: "Per-class F1-score on the test set",
+          },
+        },
+      ],
+    },
   },
   {
     slug: "serveract-ota",
@@ -134,5 +220,27 @@ export const projects: Project[] = [
     tech: ["Python", "FastAPI", "MariaDB", "SHA-256"],
     type: "solo",
     repo: "https://github.com/jlg044/ServerAct",
+    media: {
+      kind: "code",
+      language: "python",
+      caption: {
+        es: "Detección de cambios real: compara el hash de cada archivo antes de marcarlo como actualización",
+        en: "Real change detection: hashes each file before flagging it as an update",
+      },
+      code: `def HashCreator(archivo):
+    hash_func = hashlib.sha256()
+    with open(archivo, "rb") as f:
+        while chunk := f.read(8192):
+            hash_func.update(chunk)
+    return hash_func.hexdigest()
+
+hashUV = HashCreator(pathUV)  # última versión
+hashNV = HashCreator(pathNV)  # versión nueva
+
+if hashUV == hashNV:
+    print("Sin cambios")
+else:
+    cambios.append({"tag": tag, "path": pathCambios, "filename": filename})`,
+    },
   },
 ];
