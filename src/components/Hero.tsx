@@ -117,14 +117,14 @@ export function Hero() {
         >
           <div
             aria-hidden
-            className="absolute -inset-3 -z-10 rounded-full opacity-70 blur-2xl"
+            className="absolute -inset-3 -z-10 rounded-3xl opacity-70 blur-2xl"
             style={{ background: "radial-gradient(circle, rgba(52,211,153,0.35), transparent 70%)" }}
           />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/profile.jpg"
             alt={site.name}
-            className="h-36 w-36 rounded-full border-2 border-white/10 object-cover shadow-2xl shadow-black/50 sm:h-44 sm:w-44"
+            className="h-36 w-36 rounded-2xl border-2 border-white/10 object-cover shadow-2xl shadow-black/50 sm:h-44 sm:w-44"
           />
         </div>
       </div>
